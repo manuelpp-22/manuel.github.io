@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartas para Ti</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="lindo.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="page-letters">
+
+    <div class="background-animation">
+        <!-- Letras flotantes con CSS -->
+        <div class="floating-letter">a</div><div class="floating-letter">b</div>
+        <div class="floating-letter">c</div><div class="floating-letter">d</div>
+        <div class="floating-letter">e</div><div class="floating-letter">f</div>
+    </div>
+
+    <main class="container">
+        <div class="letter-carousel initial-hidden">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="flip-icon">💌</p>
+                        <p class="flip-instruction">Toca para leer</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p id="letterText"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="letter-navigation">
+                <button id="prevBtn" class="btn-nav">Anterior</button>
+                <span id="letterCounter">1 / 10</span>
+                <button id="nextBtn" class="btn-nav">Siguiente</button>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

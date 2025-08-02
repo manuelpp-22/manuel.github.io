@@ -1,0 +1,668 @@
+/* === CONFIGURACIÓN GLOBAL Y TIPOGRAFÍA === */
+:root {
+    --font-title: 'Dancing Script', cursive;
+    --font-body: 'Montserrat', sans-serif;
+    --color-primary: #f8c5d8; /* Rosa pastel */
+    --color-secondary: #d9b8f1; /* Lavanda */
+    --color-text: #4b425a; /* Morado oscuro */
+    --color-light: #fffafc;
+    --color-dark: #1e1a26;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    z-index: 10;
+}
+
+.initial-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* === ESTILOS DE PÁGINAS ESPECÍFICAS === */
+.page-login { background: linear-gradient(135deg, #fce3ec, #f8d5e5); }
+.page-bts { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+.page-letters { background: linear-gradient(135deg, #fff1eb, #ace0f9); }
+.page-finale { background-color: var(--color-dark); }
+.page-bouquet { background-color: #ffdde1; /* Color inicial para la animación */ }
+
+/* === COMPONENTES === */
+.title {
+    font-family: var(--font-title);
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.btn-primary {
+    font-family: var(--font-body);
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    border: 2px solid var(--color-secondary);
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* --- Página de Login --- */
+.login-box {
+    /* Efecto Glassmorphism */
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.login-box .title,
+.login-box .subtitle,
+.login-box label {
+    color: var(--color-dark);
+    text-shadow: none;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(75, 66, 90, 0.3);
+    font-family: var(--font-body);
+    background-color: rgba(255, 255, 255, 0.5);
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 3px rgba(248, 197, 216, 0.5);
+}
+
+.login-error {
+    color: #c0392b; /* Un rojo suave y elegante */
+    margin-top: 1rem;
+    font-weight: 600;
+    min-height: 1.2em; /* Evita que el diseño salte al aparecer el texto */
+    transition: opacity 0.3s;
+}
+
+/* --- Página de BTS --- */
+.page-bts .title { color: var(--color-light); }
+.page-bts .subtitle { color: var(--color-light); }
+.page-bts .btn-primary { background-color: #fbc2eb; border-color: #a18cd1; }
+
+/* --- Página de Cartas --- */
+.page-letters .content-box {
+    color: #5a5242;
+}
+
+.letter-carousel {
+    background: rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 90vw;
+    max-width: 600px;
+    min-height: 300px;
+    display: flex;  
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.letter-content p {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    line-height: 1.6;
+    min-height: 150px;
+    color: #3d372d;
+}
+/* --- PANTALLA DE BIENVENIDA --- */
+
+/* --- CARTA FLIP 3D --- */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 200px; /* Altura fija para la carta */
+    perspective: 1000px; /* Efecto 3D */
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.flip-card-front {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.flip-card-front .flip-icon { font-size: 4rem; }
+.flip-card-front .flip-instruction { font-size: 1rem; margin-top: 1rem; font-family: var(--font-body); }
+
+.flip-card-back {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: rotateY(180deg);
+}
+#welcomeOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fce3ec, #f8d5e5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    color: var(--color-text);
+    transition: opacity 1s ease;
+}
+
+.welcome-content h2 {
+    font-family: var(--font-title);
+    font-size: 3rem;
+}
+
+.welcome-content p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.heart-icon {
+    margin: 2rem auto 0;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    position: relative;
+    transform: rotate(-45deg);
+    animation: pulse 1.5s infinite;
+}
+
+.heart-icon::before,
+.heart-icon::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+}
+
+.heart-icon::before { top: -20px; left: 0; }
+.heart-icon::after { left: 20px; top: 0; }
+
+@keyframes pulse {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.1); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+.letter-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.btn-nav {
+    background: none;
+    border: 2px solid var(--color-secondary);
+    color: var(--color-secondary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-nav:hover { background-color: var(--color-secondary); color: white; }
+
+/* --- Página Final --- */
+.page-finale .title {
+    color: var(--color-light);
+    font-size: 4rem;
+}
+
+/* === ANIMACIONES DE FONDO === */
+.background-animation div {
+    position: absolute;
+    bottom: -150px;
+    opacity: 0;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+.heart {
+    width: 20px; height: 20px;
+    background-color: var(--color-primary);
+    animation: float 15s linear infinite;
+}
+.heart::before, .heart::after {
+    content: ''; position: absolute; width: 20px; height: 20px;
+    background-color: var(--color-primary); border-radius: 50%;
+}
+.heart::before { top: -10px; left: 0; }
+.heart::after { top: 0; left: -10px; }
+
+.heart:nth-child(1) { left: 10%; animation-delay: 0s; transform: scale(0.6); }
+.heart:nth-child(2) { left: 20%; animation-delay: 2s; transform: scale(1); }
+.heart:nth-child(3) { left: 35%; animation-delay: 5s; transform: scale(0.8); }
+.heart:nth-child(4) { left: 55%; animation-delay: 1s; transform: scale(0.5); }
+.heart:nth-child(5) { left: 75%; animation-delay: 3s; transform: scale(0.9); }
+.heart:nth-child(6) { left: 90%; animation-delay: 6s; transform: scale(0.7); }
+
+.sparkle {
+    width: 5px; height: 5px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    animation: float 20s linear infinite;
+}
+.sparkle:nth-child(1) { left: 15%; animation-delay: 0s; }
+.sparkle:nth-child(2) { left: 25%; animation-delay: 5s; }
+.sparkle:nth-child(3) { left: 45%; animation-delay: 2s; }
+.sparkle:nth-child(4) { left: 65%; animation-delay: 8s; }
+.sparkle:nth-child(5) { left: 80%; animation-delay: 4s; }
+.sparkle:nth-child(6) { left: 95%; animation-delay: 1s; }
+
+/* Animación para la página de las cartas */
+.floating-letter {
+    font-family: var(--font-title);
+    color: var(--color-secondary);
+    font-size: 2rem;
+    animation: float 30s linear infinite;
+}
+.floating-letter:nth-child(1) { left: 10%; animation-delay: 0s; font-size: 1.5rem; }
+.floating-letter:nth-child(2) { left: 20%; animation-delay: 8s; font-size: 2.5rem; }
+.floating-letter:nth-child(3) { left: 35%; animation-delay: 15s; font-size: 2rem; }
+.floating-letter:nth-child(4) { left: 55%; animation-delay: 21s; font-size: 1.8rem; }
+.floating-letter:nth-child(5) { left: 75%; animation-delay: 12s; font-size: 3rem; }
+.floating-letter:nth-child(6) { left: 90%; animation-delay: 25s; font-size: 2.2rem; }
+
+
+.starry-sky {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden;
+}
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+    from { opacity: 0.5; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1.2); }
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 600px) {
+    .title { font-size: 2.5rem; }
+    .subtitle { font-size: 1rem; }
+    .letter-carousel { padding: 1.5rem; }
+    .letter-content p { font-size: 1.5rem; }
+    .page-finale .title { font-size: 2.8rem; }
+}
+
+
+/* --- Controles de Música --- */
+.music-controls-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    opacity: 0; /* Comienza oculto */
+    transform: scale(0);
+    visibility: hidden;
+}
+.music-control-btn {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Evita que el botón se encoja */
+
+}
+
+.music-control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.music-control-btn .icon-pause,
+.music-control-btn .icon-play {
+    position: absolute;
+    color: white;
+    transition: opacity 0.3s ease;
+}
+
+/* Icono de Pausa (||) */
+.music-control-btn .icon-pause::before {
+    content: '❚❚'; /* Símbolo de pausa */
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Icono de Play (►) */
+.music-control-btn .icon-play::before {
+    content: '▶'; /* Símbolo de play */
+    font-size: 16px;
+    padding-left: 2px; /* Ajuste visual */
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Lógica de visibilidad de iconos */
+.music-control-btn .icon-play {
+    opacity: 0;
+}
+
+.music-control-btn.paused .icon-pause {
+    opacity: 0;
+}
+
+.music-control-btn.paused .icon-play {
+    opacity: 1;
+}
+
+/* Animación para que el botón aparezca */
+.music-controls-container.visible {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+/* --- Estilos del Slider de Volumen --- */
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0; /* Comienza oculto */
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: width 0.4s ease-in-out, margin-left 0.4s ease-in-out;
+    margin-left: 0;
+}
+
+.music-controls-container:hover .volume-slider {
+    width: 120px; /* Ancho al mostrarse */
+    margin-left: 10px;
+}
+
+/* Estilo del 'thumb' (la bolita para arrastrar) para Webkit/Blink (Chrome, Safari) */
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--color-light);
+    border-radius: 50%;
+    border: 2px solid var(--color-secondary);
+    transition: transform 0.2s ease;
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+/* Estilo del 'thumb' para Firefox */
+.volume-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--color-light);
+    border-radius: 50%;
+    border: 2px solid var(--color-secondary);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+/* --- ESTILOS PARA LA PÁGINA DEL RAMO DE TULIPANES --- */
+
+/* Contenedor principal del ramo */
+#bouquet-container {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin: 20px auto 0; /* Margen para separarlo del título */
+    transform: scale(0.9);
+}
+
+/* ¡NUEVO! Estilo para el envoltorio del ramo */
+.bouquet-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Forma de trapecio para simular papel */
+    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+    z-index: 5; /* Detrás de las flores, para que los tallos se "metan" dentro */
+}
+
+/* Estilo para cada tulipán individual */
+.tulip {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100px;
+    height: 200px;
+    transform-origin: bottom center;
+    opacity: 1; /* GSAP controlará la animación */
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Efecto de brillo y escala al pasar el mouse */
+.tulip:hover {
+    transform: scale(1.05) !important; /* Usamos !important para sobreescribir el transform de GSAP */
+    filter: brightness(1.15);
+}
+
+/* Estilo para el lazo del ramo */
+.bouquet-bow {
+    font-size: 50px;
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1; /* GSAP controlará la animación */
+    cursor: default;
+    z-index: 25; /* El lazo siempre por encima de todo */
+}
+
+
+/* Botón especial para la sorpresa final */
+.btn-special-surprise {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-text);
+    border: none;
+    box-shadow: 0 5px 15px rgba(248, 197, 216, 0.6);
+    animation: pulse-special 2s infinite;
+}
+
+.btn-special-surprise:hover {
+    animation-play-state: paused; /* Pausa la animación al pasar el mouse */
+    box-shadow: 0 8px 25px rgba(217, 184, 241, 0.7);
+}
+
+@keyframes pulse-special {
+    0% { transform: scale(1); box-shadow: 0 5px 15px rgba(248, 197, 216, 0.6); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(217, 184, 241, 0.7); }
+    100% { transform: scale(1); box-shadow: 0 5px 15px rgba(248, 197, 216, 0.6); }
+}
+
+.final-bouquet-subtitle {
+    margin-top: 1rem;
+}
+/* Botón para reiniciar la experiencia */
+.btn-restart {
+    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.7);
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.btn-restart:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+/* --- CORAZONES AL HACER CLIC --- */
+.click-heart {
+    position: fixed; /* Usamos fixed para que las coordenadas del clic sean absolutas a la ventana */
+    width: 15px;
+    height: 15px;
+    pointer-events: none; /* Muy importante para no bloquear otros clics */
+    z-index: 9999;
+    transform: rotate(-45deg); /* Rotamos el cuadrado base */
+    background-color: var(--color-primary); /* Color por defecto */
+    opacity: 0; /* GSAP controlará la visibilidad */
+}
+
+/* Forma de corazón usando ::before y ::after */
+.click-heart::before,
+.click-heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: inherit; /* Hereda el color del padre */
+}
+
+.click-heart::before {
+    top: -7.5px;
+    left: 0;
+}
+
+.click-heart::after {
+    left: 7.5px;
+    top: 0;
+}
+
+/* --- PALABRAS FLOTANTES DE FONDO (PÁGINA RAMO) --- */
+#floatingWordsContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; /* Detrás del contenido principal */
+    pointer-events: none; /* No interfiere con los clics */
+}
+
+.floating-word {
+    position: absolute;
+    bottom: -150px; /* Inicia fuera de la pantalla */
+    font-family: var(--font-title);
+    color: rgba(255, 255, 255, 0.4); /* Color blanco semitransparente */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    animation-name: float-words;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes float-words {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    15%, 85% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
