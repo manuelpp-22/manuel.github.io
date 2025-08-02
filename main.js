@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'Love_Maze.mp3',
         'mockingbird.mp3',
         'snowma.mp3',
+        'enamorado tuyo.mp3',
         'mykind.mp3',
-        'enamorado tuyo.mp3'
         
         
 
@@ -554,5 +554,6 @@ document.addEventListener('click', (e) => {
     createClickBurst(e.clientX, e.clientY);
 });
 });
+
 
 
