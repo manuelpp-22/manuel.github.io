@@ -10,8 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const playlist = [
         'TikTok_Hit_-_I_Wanna_Be_Yours_Sped_Up_Version__CeeNaija.com_.mp3',
         'Love_Maze.mp3',
-        'mykind.mp3',
+        'mockingbird.mp3',
         'snowma.mp3',
+        'mykind.mp3',
+        'enamorado tuyo.mp3'
         
         
 
@@ -552,4 +554,5 @@ document.addEventListener('click', (e) => {
     createClickBurst(e.clientX, e.clientY);
 });
 });
+
 
